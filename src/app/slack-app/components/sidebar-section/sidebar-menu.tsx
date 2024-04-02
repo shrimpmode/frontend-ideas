@@ -5,7 +5,7 @@ import {Button} from "@/components/ui/button";
 
 export const SidebarMenu = () => {
     return (
-        <div className='p-3 flex flex-col border-0 border-r-2 border-black flex-1'>
+        <div className='p-3 flex flex-col gap-2 border-0 border-r-2 border-black flex-1'>
             <TeamSelector />
             <ThreadsButton />
             <div className=''>
