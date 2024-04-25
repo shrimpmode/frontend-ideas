@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { storeToken } from "@/client/authActions";
-import { apiMutate } from "@/client/apiClient";
+import { storeToken } from "@/auth/auth-actions";
+import { apiMutate } from "@/client/api-client";
 import { useRouter } from "next/navigation";
 
 type InputData = {

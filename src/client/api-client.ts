@@ -1,5 +1,5 @@
 import wretch, { Wretch, WretchError } from 'wretch';
-import { getToken, removeTokens, storeToken } from './authActions'
+import { getToken, removeTokens, storeToken } from '@/auth/auth-actions'
 import { refreshToken } from '@/auth/refresh-token';
 
 const api = () => {
@@ -10,7 +10,8 @@ const api = () => {
 				const { access } = await refreshToken({ refresh: getToken("refresh") })
 				storeToken(access, "access")
 			} catch (error) {
-
+				removeTokens()
+				window.location.replace('/login')
 			}
 		})
 }
@@ -20,7 +21,6 @@ export const apiQuery = (url: string) => {
 	return api().get(url).json()
 }
 
-
-export const apiMutate = <T extends any>(url: string, data: any) => {
+export const apiMutate = <T extends Record<string, string>>(url: string, data: any) => {
 	return api().post(data, url).json<T>()
 }

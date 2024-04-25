@@ -1,7 +1,7 @@
 'use client'
 
 import { verifyToken } from '@/auth/verify-token';
-import {getToken, removeTokens, replaceToken} from '@/client/authActions';
+import {getToken, removeTokens, replaceToken} from '@/auth/auth-actions';
 import { useMutation } from '@tanstack/react-query';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import {refreshToken} from "@/auth/refresh-token";
@@ -23,13 +23,17 @@ export const RootProvider = ({ children }: { children: ReactNode }) => {
 			})
 		},
 		onError: async () => {
+			try {
+
 			const {access}=  await refreshToken({ refresh: getToken('refresh') })
-				.catch(() => {
+				replaceToken(access, 'access')
+				window.location.reload()
+
+			} catch (error) {
 					removeTokens()
 					window.location.replace('/login')
-				})
-			replaceToken(access, 'access')
-			window.location.reload()
+			}
+
 		}
 	})
 

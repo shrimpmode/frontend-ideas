@@ -1,5 +1,5 @@
 import wretch from 'wretch'
-import {removeTokens} from "@/client/authActions";
+import {removeTokens} from "@/auth/auth-actions";
 
 export const refreshToken = async ({
   refresh,
@@ -9,8 +9,5 @@ export const refreshToken = async ({
   return await wretch('http://localhost:8000/api/token/refresh/')
     .post({
       refresh
-    }).json().catch(() => {
-        removeTokens()
-          window.location.reload()
-      })
+    }).json<{access: string}>()
 }

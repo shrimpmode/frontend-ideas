@@ -1,7 +1,7 @@
 'use client'
 
 import { useQuery } from "@tanstack/react-query";
-import { apiQuery } from "@/client/apiClient";   
+import { apiQuery } from "@/client/api-client";
 
 export default function Page() {
     const { data } = useQuery({
