@@ -74,3 +74,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+@font-face {
+    font-family: 'apercu', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/apercu/Apercu_Regular.otf') format('otf');
+}

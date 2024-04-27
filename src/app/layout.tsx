@@ -1,11 +1,21 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { QueryClientProviderWrapper } from "@/context/query-client-context";
-import { RootProvider } from "@/context/root-provider";
 import {ReactNode} from "react";
+import localFont from "next/font/local";
+import {QueryClientProviderWrapper} from "@/context/query-client-context";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const localFonts = localFont({
+    src: [
+      {
+        path: "./fonts/apercu/Apercu_Regular.otf",
+        weight: "400",
+        style: "normal",
+      }
+    ]
+    })
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,16 +27,13 @@ export default function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  console.log('RootLayout')
   return (
-    <QueryClientProviderWrapper>
-      <html lang="en">
-        <body className={inter.className}>
-          <RootProvider>
-            {children}
-          </RootProvider>
-        </body>
-      </html>
-    </QueryClientProviderWrapper>
+      <QueryClientProviderWrapper>
+          <html lang="en">
+            <body className={`${localFonts.className} ${inter.className}` }>
+                {children}
+            </body>
+          </html>
+      </QueryClientProviderWrapper>
   );
 }
